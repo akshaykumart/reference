@@ -1,0 +1,59 @@
+-----------Dockerfile--------------------
+
+FROM ubuntu:22.04
+WORKDIR /app
+RUN apt-get update
+RUN apt-get -y install mysql-client
+RUN apt-get -y install python3-mysqldb
+RUN apt-get -y install libmysqlclient-dev
+RUN apt-get -y install python3-virtualenv
+RUN apt-get -y install python3-dev
+RUN apt-get -y install acl
+RUN apt-get -y install nano
+RUN apt-get -y install default-libmysqlclient-dev
+RUN apt-get -y install build-essential
+RUN apt-get -y install nginx
+RUN apt-get -y install python3
+RUN apt-get -y install python3-pip
+COPY requirements.txt requirements.txt
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 8000
+CMD python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000
+
+-----------settings.py--------------------
+
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv('DEBUG')
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
+    }
+}
+
+------------Docker Image---------------------
+
+docker build . -t docker
+
+------------Network-----------------
+
+docker network create my-net
+
+------------Docker Container for mysql--------------------
+
+docker run -dit --name mysql_cont --network my-net -e "MYSQL_ROOT_PASSWORD=password" -e "MYSQL_USER=akshay" -e "MYSQL_PASSWORD=akshay01" -e "MYSQL_DATABASE=mydb" mysql
+
+------------Docker Container for Django-------------------
+
+docker run -dit --name django_cont --network my-net -p 8080:8000 -e "DB_NAME=mydb" -e "DB_USER=akshay" -e "DB_PASSWORD=akshay01" -e "DB_HOST=mysql_cont" -e "DB_PORT=3306" -e 'SECRET_KEY="django-insecure-+#*5kh=#b&icz(g289)pab#94@la)7b174g!z-w+c#smaxhfu)"' -e "DEBUG=False" django
+
+
+
+
+
