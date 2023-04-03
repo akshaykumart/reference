@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: create virtualenv and install django in it
+      pip: "name=django virtualenv=/home/vm03/myproject/myenv virtualenv_command=virtualenv"
+
+    - name: install a django project
+      command: "/home/{{project_name}}/env/bin/django-admin.py startproject {{project_name}} chdir=/home/{{project_name}}/"
