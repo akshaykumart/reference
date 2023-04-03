@@ -1,0 +1,22 @@
+docker build . --build-arg MYSQL_DATABASE=mydb --build-arg MYSQL_USER=akshay --build-arg MYSQL_PASSWORD=akshay01 --build-arg MYSQL_HOST=mysql_cont -t django
+
+
+docker run -dit --name django_cont django
+
+docker run -dit -h mysql_cont --name mysql_cont -e "MYSQL_ROOT_PASSWORD=password" -e "MYSQL_USER=akshay" -e "MYSQL_PASSWORD=akshay01" -e "MYSQL_DATABASE=mydb" mysql
+
+docker run -dit --name django_cont --network my-net -p 8080:8000 -e "DB_NAME=mydb" -e "DB_USER=akshay" -e "DB_PASSWORD=akshay01" -e "DB_HOST=mysql_cont" -e "DB_PORT=3306" -e 'SECRET_KEY="django-insecure-+#*5kh=#b&icz(g289)pab#94@la)7b174g!z-w+c#smaxhfu)"' -e "DEBUG=False" django
+
+
+https://docs.docker.com/network/links/
+https://docs.docker.com/network/
+https://docs.docker.com/network/bridge/
+https://www.digitalocean.com/community/tutorials/how-to-build-a-django-and-gunicorn-application-with-docker
+https://djangocentral.com/environment-variables-in-django/
+
+
+//connect to network for communication b/w containers
+
+docker run -dit --name django_cont --network my-net -p 8080:8000 django
+
+docker run -dit --name mysql_cont --network my-net -e "MYSQL_ROOT_PASSWORD=password" -e "MYSQL_USER=akshay" -e "MYSQL_PASSWORD=akshay01" -e "MYSQL_DATABASE=mydb" mysql
