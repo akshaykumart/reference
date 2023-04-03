@@ -1,0 +1,28 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: git checkout
+      git:
+        repo: git@github.com:akshaykumart/Django.git
+        dest: /home/appuser/myproject
+        update: yes
+        force: yes
+        accept_hostkey: yes
+        key_file: /home/appuser/.shh/mysite_depkey
+      become_user: appuser
+      become: yes
+      notify:
+        - Restart gunicorn.socket
+        - Restart gunicorn.service
+
+  handlers:
+    - name: Restart gunicorn.socket
+      service:
+        name: gunicorn.socket
+        state: restarted
+
+    - name: Restart gunicorn.service
+      service:
+        name: gunicorn.service
+        state: restarted
