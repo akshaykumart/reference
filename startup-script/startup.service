@@ -1,0 +1,15 @@
+[Unit]
+Description=A startup service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/vm2/project/myenv/bin/gunicorn \
+                --access-logfile - \
+                --workers 3 \
+                --bind unix:/run/gunicorn.sock \
+                mysite.wsgi:application
+TimeoutStartSec=0
+
+[Install]
+WantedBy=default.target
