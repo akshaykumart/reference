@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Activate firewall
+      shell: ufw enable
+    
+    - name: Allow 8000
+      shell: ufw allow 8000
+
+
+    - name: Allow all access to tcp port 80
+        ufw:
+          rule: allow
+          port: '80'
+          proto: tcp    
