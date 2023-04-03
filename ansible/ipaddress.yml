@@ -1,0 +1,80 @@
+---
+- hosts: all
+  tasks:
+    - debug: ipv4=hostvars[inventory_hostname]['ansible_default_ipv4']['address']
+    - debug: ipv6=hostvars[ansible_hostname]['ansible_default_ipv6']['address']
+
+
+    - debug: var=ansible_all_ipv4_addresses
+    - debug: var=ansible_default_ipv4.address
+
+    {{ ansible_eth0.ipv4.address }}
+
+
+    {% for host in groups['all'] %}
+{{ hostvars[host]['ansible_facts']['default_ipv4']['address'] }}
+{% endfor %}
+
+
+
+- ansible.builtin.set_fact:
+    cluster_ips: []
+
+- ansible.builtin.set_fact:
+    cluster_ips: "{{ cluster_ips + [ hostvars[item]['ansible_default_ipv4']['address'] ] }}"
+  
+
+
+
+---
+- hosts: localhost
+  tasks:
+    - debug: var=ansible_all_ipv4_addresses
+    - debug: var=ansible_default_ipv4.address
+    - debug: var=ansible_facts["all_ipv4_addresses"]
+    - debug: var=ansible_facts["all_ipv6_addresses"]
+
+    - name: add ip to config file
+      lineinfile:
+        dest: /home/appuser/myproject/mysite/settings.py
+        insertbefore: 'product'
+        line: {{ansible_default_ipv4.address}}'
+        state: present
+      run_once: true
+
+    - name: Run a shell command and register its output as a variable
+       ansible.builtin.shell: |
+       register: foo_result
+       ignore_errors: true
+
+    
+     - name: fetch ip address
+       ansible.builtin.shell:
+        cmd: hostname -I
+      register: ip_addr
+      ignore_errors: True
+
+    - name: Second Task - Print the full output
+      ansible.builtin.debug:
+        var: ip_addr.stdout_lines
+
+
+
+  - name: create a list
+    set_fact:
+      allowed_hosts_ip: []
+
+  - name: fetch ip
+    set_fact:
+      ip_addr: "{{ ansible_default_ipv4.address }}"
+
+  - name: Add ip to list
+    set_fact:
+      allowed_hosts_ip : "{{ allowed_hosts_ip  + [ip_addr] }}"
+
+  - name: Print the list
+    debug: var=allowed_hosts_ip
+
+  - name: concatinate lists
+    set_fact:
+      allowed_hosts: "{{ allowed_hosts_ip }} + {{ allowed_hosts_domain }}"
