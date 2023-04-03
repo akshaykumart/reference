@@ -1,0 +1,4 @@
+- name: myrole
+  src: git@github.com:akshaykumart/myrole.git
+  scm: git
+  version: main
