@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Installing Django in venv
+      pip: "name=django virtualenv=/home/vm03/myproject/myenv virtualenv_command=virtualenv"
+
+    - name: install gunicorn in virtual env
+      pip: "name=gunicorn virtualenv=/home/vm03/myproject/myenv virtualenv_command=virtualenv"
+      
+    - name: install mysqlclient in virtual env
+      pip: "name=mysqlclient virtualenv=/home/vm03/myproject/myenv virtualenv_command=virtualenv"
+
