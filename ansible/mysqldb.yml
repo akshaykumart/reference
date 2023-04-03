@@ -1,0 +1,97 @@
+---
+- hosts: all
+  become: yes
+  vars: 
+    db_user: james
+    db_pass: james123
+    root_pass: password
+    db_name: mydb
+
+  tasks:
+    - name: Installing Mysql  and dependencies
+      package:
+         name: "{{item}}"
+         state: present
+         update_cache: yes
+      loop:
+        - mysql-server
+        - mysql-client
+        - python3-mysqldb
+        - libmysqlclient-dev
+      become: yes
+       
+    - name: start and enable mysql service
+      service:
+         name: mysql
+         state: started
+         enabled: yes
+    
+    - name: Set MySQL root password
+      mysql_user:
+        name: root
+        host: localhost
+        password: "{{ root_pass }}"
+        check_implicit_admin: yes
+        login_user: root
+        update_password: always
+        state: present
+      become: yes
+      when: root_pass == ""
+
+    - name: change authentication plugin 
+      mysql_user:
+        login_host: 'localhost'
+        login_user: 'root'
+        login_password: "{{ root_pass }}"
+        name: root
+        plugin: mysql_native_password
+        state: present
+      become: yes        
+
+    - name: creating mysql user
+      mysql_user:
+        login_user: 'root'
+        login_password: "{{ root_pass }}"
+        name: "{{db_user}}"
+        password: "{{db_pass}}"
+        priv: '*.*:ALL'
+        host: '%'
+        state: present
+      become: yes
+      
+    
+    - name: creating database
+      mysql_db:
+         name: "{{db_name}}"
+         state: present
+         login_user: root
+         login_password: "{{ root_pass }}"
+      register: db_created
+      become: yes
+    
+    - name: Enable remote login to mysql
+      lineinfile:
+         path: /etc/mysql/mysql.conf.d/mysqld.cnf
+         regexp: '^bind-address'
+         line: 'bind-address = 0.0.0.0'
+         backup: yes
+      notify:
+        - Restart mysql
+
+  handlers:
+    - name: Restart mysql
+      service:
+        name: mysql
+        state: restarted
+
+
+
+# read only privilages for user
+
+- name: creating mysql user
+      mysql_user:
+        name: "{{db_user}}"
+        password: "{{db_passwd}}"
+        priv: "student_details.*:SELECT"
+        host: '%'
+        state: present
