@@ -1,0 +1,41 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Creating an empty file
+    file:
+      path: "/your path"
+      state: touch
+
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Creating a file with content
+    copy:
+      dest: "/your path"
+      content: |
+        line 01
+        line 02
+
+
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Removing a file
+    file:
+      path: "/your path"
+      state: absent
+
+
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Create a new file with permissions
+    file:
+      path: "/your path"
+      state: touch
+      mode: 0755
+      owner: test
