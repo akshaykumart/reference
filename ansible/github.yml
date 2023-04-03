@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: creating a folder/directory
+      file:
+        name: /home/vm03/myproject
+        state: directory
+        recurse: yes
+
+    - name: clone git repo
+      git:
+       repo: https://github.com/akshaykumart/Django.git
+       dest: /home/vm03/myproject
+       version: main
+       clone: yes
+       update: yes
+       force: yes
