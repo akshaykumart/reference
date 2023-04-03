@@ -1,0 +1,49 @@
+---
+- hosts: localhost
+  connection: local
+  become: yes
+  tasks:
+    - name: Installing Mysql  and dependencies
+      package:
+         name: "{{item}}"
+         state: present
+         update_cache: yes
+      loop:
+        - mysql-server
+        - mysql-client
+        - python3-mysqldb
+        - libmysqlclient-dev
+      become: yes
+
+    - name: start and enable mysql service
+      service:
+         name: mysql
+         state: started
+         enabled: yes
+
+    - name: creating mysql new user
+      mysql_user:
+        login_user: 'root'
+        name: 'kumar'
+        password: 'kumar01'
+        host: 'localhost'
+        state: present
+      become: yes
+
+    - name: creating database
+      mysql_db:
+         login_user: root
+         name: 'mydb'
+         state: present
+      register: db_created
+      become: yes
+
+    - name: Granting privileges to user
+      mysql_user:
+        login_user: 'root'
+        name: 'kumar'
+        password: 'kumar01'
+        host: 'localhost'
+        priv: 'mydb.*:ALL'
+        state: present
+      become: yes
