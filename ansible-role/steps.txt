@@ -1,0 +1,8 @@
+# Create a ansible role
+$ ansible-galaxy install username.rolename
+
+# Download ansible role from SCM
+$ ansible-galaxy install -r requirements.yml
+
+# default location
+cd .ansible/roles
