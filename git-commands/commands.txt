@@ -1,0 +1,69 @@
+$ git init
+$ git clone <repo-url>
+$ git branch   //verify
+$ git checkout main
+$ git pull
+$ git branch <new branch>      //create a new branch
+$ git checkout <new branch>
+$ git branch   //verify
+$ vi athleteupStageFeAppBuildDeploy.groovy    //create a new file
+$ ls  //verify new file
+$ git status
+$ git add .
+$ git commit -m "commit message"
+$ git push --set-upstream origin <new branch>
+
+----------clone the repository-----------
+$ git init
+$ git clone <repo_URL>
+
+----------push the code to main/master branch----------
+
+$ git init -b main
+$ git add .
+$ git commit -m "commit msg"
+$ git remote add origin <remote_URL>
+$ git remote -v
+$ git push --set-upstream origin main
+	username: <username>
+	password: <PAT Token>
+	
+----------create a new branch----------
+
+$ git checkout -b <new_branch_name> 
+$ git branch   //verify
+   
+         (or)
+         
+$ git branch <new branch name>
+$ git checkout <new branch name>
+
+----------push the code to new branch---------------
+
+$ git add .
+$ git commit -m "commit msg"
+$ git remote add origin <remote_URL>
+$ git remote -v
+$ git push origin new_branch
+	username: <username>
+	password: <PAT Token>
+
+----------To add the changes into the master----------
+
+$ git checkout master
+$ git merge <new_branch>
+
+----------To change a commit message-------------
+
+$ git commit --amend
+$ git push --force-with-lease origin EXAMPLE-BRANCH
+
+----------Squash commit messages-----------
+
+$ git rebase -i HEAD~n
+$ git push --force origin EXAMPLE-BRANCH
+
+-------------pull------------
+
+$ git config --global pull.ff only
+$ git pull --rebase origin main
