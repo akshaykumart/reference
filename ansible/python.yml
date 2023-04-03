@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Running apt update
+      apt: update_cache=yes
+      
+    - name: Install python
+      package: "name=python3 state=latest"
