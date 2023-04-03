@@ -1,0 +1,24 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: collect static
+      shell: |
+        source /home/vm03/myproject/myenv/bin/activate
+        /home/vm03/myproject/manage.py collectstatic
+        /home/vm03/myproject/manage.py makemigrations
+        /home/vm03/myproject/manage.py migrate
+    
+
+    - name: collect static
+      shell: |
+        /home/vm03/myenv/bin/python3.10 /home/vm03/myproject/manage.py collectstatic
+        /home/vm03/myenv/bin/python3.10 /home/vm03/myproject/manage.py makemigrations
+        /home/vm03/myenv/bin/python3.10 /home/vm03/myproject/manage.py migrate
+    
+    - name: migrate
+      shell: |
+        /home/vm03/myenv/bin/python /home/vm03/myproject/manage.py makemigrations
+        /home/vm03/myenv/bin/python /home/vm03/myproject/manage.py migrate
+
+
