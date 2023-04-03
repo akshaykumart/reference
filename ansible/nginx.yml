@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install Nginx 
+      apt: "name=nginx state=latest"
+    
+    - name: start and enable nginx service
+      service:
+        name: mysql
+        state: started
+        enabled: yes
