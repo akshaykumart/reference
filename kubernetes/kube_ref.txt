@@ -1,0 +1,32 @@
+kubernetes deployment
+https://www.youtube.com/watch?v=05BwSZ9elYI
+https://github.com/dotja/django_kubernetes
+
+
+----------------port forwarding the services -----------------------
+
+$ kubectl port-forward service/django 8080:8000
+
+---------------- kubernetes secrets-------------------------
+ //create a secrets
+ 
+$ kubectl create secret generic db-details \
+    --from-literal=database=mydb \
+    --from-literal=username=akshay \
+    --from-literal=password='akshay01'
+   
+ //view a secrets
+ 
+$ kubectl get secrets
+$ kubectl describe secret db-details
+
+$ kubectl get secret db-details -o jsonpath='{.data}'                                //encoded format
+$ kubectl get secret db-details -o jsonpath='{.data.password}' | base64 --decode    //decoded format   
+
+ //edit secerets
+ 
+$ kubectl edit secrets db-details
+
+ //delete secrets
+
+$ kubectl delete secret db-details
