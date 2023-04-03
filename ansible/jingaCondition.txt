@@ -1,0 +1,17 @@
+{{ ip_address | ipaddr }}
+
+
+
+{% if 'domain_name' is not none %}   
+    {{ domain_name }}
+{% else %}
+    NONE
+{% endif %}
+
+
+{{ domain_name if domain_name is not none else ''}}
+
+{{ domain_name or '' }}
+
+
+"{{ domain_name if domain_name is not none else '' }}"
