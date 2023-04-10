@@ -1,0 +1,11 @@
+# create a new file
+  $ touch akshay.txt
+
+# Zip a file with encryption 
+  $ sudo apt install zip unzip
+  $ zip -re output_file.zip file1 folder1
+    zip -re akshay.zip akshay.txt .
+
+# Unzip a file with encryption
+  $ unzip output_file.zip -p <password>
+
