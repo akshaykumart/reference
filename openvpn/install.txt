@@ -4,4 +4,4 @@ $ sudo apt -y install openvpn
 $ sudo apt -y install openvpn-systemd-resolved
 $ sudo openvpn --config /home/akshay/Downloads/akshay_kumar/akshay_kumar-systemd-resolved.ovpn  --auth-retry interact
 
-
+https://www.techchorus.net/blog/run-your-own-openvpn-server/
