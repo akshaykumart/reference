@@ -1,0 +1,5 @@
+connect to server via SSH
+$ ssh user@<ip_address>
+$ ssh user@<ip_address> -i <path/to/private_key>
+         or
+$ ssh <domain_name> -i <path/to/private_key>
