@@ -1,0 +1,11 @@
+https://www.techchorus.net/blog/loading-ssh-key-into-memory/ 
+
+Loading SSH Key Into Memory
+
+start the ssh-agent and then load the key into memory via ssh-add.
+
+Step 1: Start the agent
+  eval $(ssh-agent)
+  
+Step 2: load the key into memory
+  ssh-add /path/to/your/private/key
