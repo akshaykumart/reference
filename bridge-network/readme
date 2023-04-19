@@ -1,0 +1,84 @@
+# bridge-network
+Linux KVM Bridge
+
+## Reference
+```
+https://www.techchorus.net/blog/linux-kvm-bridge/
+```
+## Git Repo
+```
+https://github.com/akshaykumart/bridge-network.git
+```
+## Steps
+```
+1. On host machine: Install a KVM Virtualization packages
+
+   * $ sudo apt install bridge-utils libvirt-clients libvirt-daemon-driver-qemu libvirt-daemon-system libvirt-daemon  qemu qemu-kvm  virt-manager
+   * $ sudo systemctl start libvirtd
+   * $ sudo systemctl enable libvirtd   
+   
+2. On host machine : Creating a Bridge Network "br0" and new host-bridge network for creating vm in KVM
+
+   * Create the Netplan configuration file /etc/netplan/01-netcfg.yaml
+   * Create a file named host-bridge.xml with following content
+      <network>
+      <name>host-bridge</name>
+      <forward mode="bridge"/>
+      <bridge name="br0"/>
+      </network>
+   * Create the script file "netplan.sh"
+   * Add executable permission for the script file "netplan.sh" by following command
+     $ sudo chmod +x netplan.sh
+   * Execute the script by following command
+     $ sudo ./netplan.sh
+   * Validate bridge created
+     $ ip a
+   * Validate host-bridge network
+     $ virsh net-list --all
+     
+3. On host machine: Creating a ubuntu guest VM 
+
+   * Create a file named "ubuntu_guest.sh"
+   * Crete a QEMU image for disk path
+     $ qemu-img create -f qcow2 /var/lib/libvirt/images/ubuntu2204test.img 20G
+   * Add executable permission for the script file "ubuntu_guest.sh" by following command
+     $ sudo chmod +x ubuntu_guest.sh
+   * Execute the script by following command
+     $ sudo ./ubuntu_guest.sh
+
+4. On host machine: Creating a centOS guest VM 
+   
+   * Create a file named "centos_guest.sh"
+   * Create a QEMU image for disk path
+     $ qemu-img create -f qcow2 /var/lib/libvirt/images/centos9streamtest.img 20G
+   * Add executable permission for the script file "centos_guest.sh" by following command
+     $ sudo chmod +x centos_guest.sh
+   * Execute the script by following command
+     $ sudo ./centos_guest.sh
+     
+5. On Ubuntu guest vm: Configuring the Network
+   
+   * Create a file named "00-installer-config.yaml"
+   * Create a script file named "guest_netplan.sh" 
+   * Add executable permission for the script file "guest_netplan.sh" by following command
+     $ sudo chmod +x guest_netplan.sh
+   * Execute the script by following command
+     $ sudo ./guest_netplan.sh
+   * verify cat /etc/netplan/00-installer-config.yaml
+   
+6. On CentOS guest vm: Configuring the Network
+
+   * Create a script file named "net_conf.sh"
+   * Add executable permission for the script file "net_conf.sh" by following command
+     $ sudo chmod +x net_conf.sh
+   * Execute the script by following command
+     $ sudo ./net_conf.sh
+
+7. Testing / Verifying
+
+   * Install any webservers on ubuntu and Centos guest VM
+   * Access the webserver from other host02 connected to the same network switch
+
+   
+   
+```
