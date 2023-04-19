@@ -1,0 +1,37 @@
+------------CentOS------------
+# update
+$ sudo dnf update
+
+# Install any package
+$ sudo dnf install nginx -y
+
+# start and enable service
+$ sudo systemctl start nginx
+$ sudo systemctl enable nginx
+$ sudo systemctl status nginx
+
+# Activate firewall
+$ sudo firewall-cmd --state
+$ sudo systemctl status firewalld.service
+$ sudo systemctl start firewalld.service
+$ sudo systemctl enable firewalld.service
+$ sudo systemctl stop firewalld.service
+
+# firewall zone
+$ sudo firewall-cmd --get-default-zone                        //view default zone=public
+$ sudo firewall-cmd --set-default-zone=work                   // set default zone
+
+# adding rules and removing rules
+
+$ sudo firewall-cmd --add-port=80/tcp --permanent            //adding rules
+$ sudo firewall-cmd --reload                                 //activating
+$ sudo firewall-cmd --list-all                               //verifying
+
+$ sudo firewall-cmd --remove-port=80/tcp --permanent         //removing existing rules
+$ sudo firewall-cmd --reload                                 //activating
+$ sudo firewall-cmd --list-all                               //verifying
+
+# port forwarding 
+
+$ sudo firewall-cmd --add-forward-port=port=80:proto=tcp:toport=7290 --permanent
+$ sudo firewall-cmd --reload
