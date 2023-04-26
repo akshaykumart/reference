@@ -87,4 +87,4 @@ $ git commit -m "removed file from tracking"
 
 -------------view commits hash---------------
 $ git log
-$ git lop -p
+$ git lop -p      //view log along with the changes made
