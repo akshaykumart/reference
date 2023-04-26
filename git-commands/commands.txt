@@ -84,3 +84,8 @@ $ git status            //verify
 $ git rm --cached 1.txt
 $ git status        
 $ git commit -m "removed file from tracking"
+
+-------------view commits hash---------------
+
+$ git log
+
