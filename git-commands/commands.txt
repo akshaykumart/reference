@@ -13,6 +13,10 @@ $ git add .
 $ git commit -m "commit message"
 $ git push --set-upstream origin <new branch>
 
+-----------------find changes-------------
+$ git diff            //compares changes btw working dir and staging area
+$ git diff --stage    //compares changes btw last commit and staging area
+
 ----------clone the repository-----------
 $ git init
 $ git clone <repo_URL>
