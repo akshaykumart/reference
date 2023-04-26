@@ -86,6 +86,5 @@ $ git status
 $ git commit -m "removed file from tracking"
 
 -------------view commits hash---------------
-
 $ git log
-
+$ git lop -p
