@@ -75,3 +75,7 @@ $ git pull --rebase origin main
 -------------delete files using git command-----------------
 $ git rm 1.txt
 
+-------------rename the file using git command--------------
+$ git mv 1.txt 1_new.txt
+
+
