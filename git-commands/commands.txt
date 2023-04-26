@@ -80,3 +80,7 @@ $ git status             //verify
 $ git mv 1.txt 1_new.txt
 $ git status            //verify
 
+-------------untrack files---------------------
+$ git rm --cached 1.txt
+$ git status        
+$ git commit -m "removed file from tracking"
