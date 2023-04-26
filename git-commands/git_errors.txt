@@ -1,0 +1,20 @@
+1>  $ git push 
+
+    ! [rejected]        feature2 -> feature2 (non-fast-forward)
+    error: failed to push some refs to 'https://github.com/akshaykumart/practical.git'
+    
+    when this error occurs difference in commit messages in local and remote repo.
+    when you commit message using $ git commit --amend
+    
+    solution : force push when ever there is change in commits, squashing commits, and amending commits
+               $ git push -f
+               
+2> Deleting the changes and removing the commit 
+   
+   $ git rebase -i HEAD~n
+   
+   Delete entire line the commit you want to remove
+   eg: pick afafagsjahjfagfahjafa
+   save and exit
+   
+
