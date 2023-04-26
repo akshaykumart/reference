@@ -71,3 +71,7 @@ $ git push --force origin EXAMPLE-BRANCH
 
 $ git config --global pull.ff only
 $ git pull --rebase origin main
+
+-------------delete files using git command-----------------
+$ git rm 1.txt
+
