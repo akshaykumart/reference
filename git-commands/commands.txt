@@ -1,3 +1,7 @@
+-------------git config--------------
+$ git config --global user.name "akshaykumart"
+$ git config --global user.email "akshaykumarhm5@gmail.com"
+-----------------------------------------------------------------------------
 $ git init
 $ git clone <repo-url>
 $ git branch   //verify
@@ -39,8 +43,9 @@ $ git branch   //verify
    
          (or)
          
-$ git branch <new branch name>
-$ git checkout <new branch name>
+$ git branch <new branch name>                       //to create a new branch
+$ git checkout <new branch name>                     //to get into the branch
+$ git branch -d <branch_name>                        //to delete the branch
 
 ----------push the code to new branch---------------
 
@@ -89,3 +94,15 @@ $ git commit -m "removed file from tracking"
 $ git log
 $ git log -p      //view log along with the changes made
 $ git log -p -3   //view only 3 latest log along with chanes made
+$ git log --pretty=oneline     //prints commit hash in single line
+
+-------------stash----------------
+
+$ git stash                        //stash or selves the changes made to stash
+$ git stash -u                     //stashes untracked files/new files to stash
+$ git stash save "message"         //stashes with a message
+$ git stash list                   //shows the stash list
+$ git stash pop                    //removes stash to working dir
+$ git stash apply                  //keep stash and get into the working dir
+$ git stash drop stash@{1}         //deletes the particular stash
+$ git stash clear                  //deletes all stashs
