@@ -109,3 +109,7 @@ $ git stash pop                    //removes stash to working dir
 $ git stash apply                  //keep stash and get into the working dir
 $ git stash drop stash@{1}         //deletes the particular stash
 $ git stash clear                  //deletes all stashs
+
+----------accidentaly if u delete any content from file in working dir , if u want to restore it with previous commit-------
+$ git checkout -- filename
+
