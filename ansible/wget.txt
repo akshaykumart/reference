@@ -1,0 +1,9 @@
+sudo wget http://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img -O /var/lib/libvirt/images/jammy-server-cloudimg-amd64.img
+
+#using ansible playbook
+
+tasks:
+    - name: Download Cloud Backing Image
+      get_url:
+        url: "http://example.com/cloud-image.qcow2"
+        dest: "/path/to/save/cloud-image.qcow2"
