@@ -1,0 +1,28 @@
+Creating a centOs VM inside a centOs Host using libvirt, cloud-init, Virsh 
+
+# Download centos cloud image
+
+$ wget https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-20220621.1.x86_64.qcow2 -O /var/lib/libvirt/images/CentOS-Stream-GenericCloud-9.img
+
+# create a folder
+
+ $ mkdir mycentOS9test01
+ $ mkdir mycentOS9test02
+
+ $ cd mycentOS9test01
+
+# create base image out of cloud image
+
+ $ qemu-img create -b ../CentOS-Stream-GenericCloud-9.img -f qcow2 -F qcow2 mycentOS9test01-base.img 10G
+ 
+# create a templetes for metadata, userdata, network-config
+
+ $ vi meta-data.yaml
+ $ vi user-data.yaml
+ $ vi network-config.yaml
+ 
+# create a VM using virsh command
+
+ $ virt-install --name=mycentostest01 --ram=512 --vcpus=1 --import --disk path=mycentOS9test01-base.img,format=qcow2 --os-variant=centos-stream9 --network bridge=virbr0,model=virtio --graphics vnc,listen=0.0.0.0 --noautoconsole --cloud-init user-data=user-data.yaml,meta-data=meta-data.yaml
+ 
+ $ virt-install --name=mycentOS9test01 --ram=512 --vcpus=1 --import --disk path=mycentOS9test01-base.img,format=qcow2 --os-variant=centos-stream9 --network bridge=virbr0,model=virtio --graphics vnc,listen=0.0.0.0 --noautoconsole --cloud-init user-data=user-data.yaml,meta-data=meta-data.yaml,network-config=network-config.yaml
