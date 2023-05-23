@@ -26,3 +26,18 @@ $ wget https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-Gene
  $ virt-install --name=mycentostest01 --ram=512 --vcpus=1 --import --disk path=mycentOS9test01-base.img,format=qcow2 --os-variant=centos-stream9 --network bridge=virbr0,model=virtio --graphics vnc,listen=0.0.0.0 --noautoconsole --cloud-init user-data=user-data.yaml,meta-data=meta-data.yaml
  
  $ virt-install --name=mycentOS9test01 --ram=512 --vcpus=1 --import --disk path=mycentOS9test01-base.img,format=qcow2 --os-variant=centos-stream9 --network bridge=virbr0,model=virtio --graphics vnc,listen=0.0.0.0 --noautoconsole --cloud-init user-data=user-data.yaml,meta-data=meta-data.yaml,network-config=network-config.yaml
+ 
+# network config file for centos vm's
+
+ network:
+  version: 1
+  config:
+  - type: physical
+    name: eth0
+    subnets:
+      - type: static
+        address: 192.168.122.120/24
+        routes:
+          - destination: 0.0.0.0/0
+            gateway: 192.168.122.1
+
