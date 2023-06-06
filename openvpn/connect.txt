@@ -1,0 +1,9 @@
+--------------------connect to athleteup VPN-------------------
+$ sudo openvpn --config /home/akshay/Documents/akshay/openvpn/athleteup/akshay_kumar/akshay_kumar-systemd-resolved.ovpn  --auth-retry interact
+
+--------------------connect to ninebx VPN---------------------
+$ sudo openvpn --config /home/akshay/Documents/akshay/openvpn/ninebx/akshay/akshay-systemd-resolved.ovpn  --auth-retry interact
+
+--------------------connect to reghedge VPN-------------------
+$ sudo openvpn --config /home/akshay/Documents/akshay/openvpn/reghedge/akshay_kumar/akshay_kumar-systemd-resolved.ovpn  --auth-retry interact
+
