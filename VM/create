@@ -1,0 +1,37 @@
+- name: Check if VM exist
+  virt:
+    command: "list_vms"
+  register: vm_check
+
+- name: Register VM result
+  debug:
+    var: vm_check
+
+- name: Register VM
+  set_fact:
+    vm_created: "{{ 'yes' if vm_vm_name in vm_check.list_vms else 'no' }}"
+
+- name: Execute virsh command for creating ubuntu vm with static ip in ubuntu host
+  command:
+    cmd: "virt-install \
+         --name={{ vm_vm_name }} \
+         --ram=512 \
+         --vcpus=1 \
+         --import \
+         --disk path=/var/lib/libvirt/images/{{ vm_directory_name }}/{{ vm_baseimg }}.img,format=qcow2 \
+         --os-variant={{ vm_os_variant }} \
+         --network bridge=virbr0,model=virtio \
+         --graphics vnc,listen=0.0.0.0 --noautoconsole \            
+         --cloud-init user-data=/var/lib/libvirt/images/{{ vm_directory_name }}/user-data.yaml,meta-data=/var/lib/libvirt/images/{{ vm_directory_name }}/meta-data.yaml,network-config=/var/lib/libvirt/images/{{ vm_directory_name }}/ubuntu-network-config.yaml"
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - vm_vm_type == 'Ubuntu'
+    - vm_static_network == true
+    - vm_bridge_network == false
+    - vm_created == 'no' or not vm_check.list_vms
+
+
+- name: Debug skipped task
+  debug:
+    msg: "Task skipped"
+  when: vm_created == 'yes' and vm_output.list_vms
