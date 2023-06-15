@@ -1,0 +1,5 @@
+to copy ssh public key to remote host authorized keys
+
+1> directly copy the public key from /.ssh and paste it in /.ssh/authorized_keys on remote host
+2> use command line
+   ssh-copy-id -i path/to/host_machine.pub remote-user@192.168.1.100
