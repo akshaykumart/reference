@@ -1,0 +1,8 @@
+1> List all running VMs:
+   virsh list --all
+
+2> Check the status of a specific VM:
+   virsh domstate <vm_name>
+
+3> Get detailed information about a specific VM:
+   virsh dominfo <vm_name>
