@@ -1,0 +1,81 @@
+list_vms:
+  - name: roleinput1
+    vm_vm_name: kubea-cp-01
+    vm_vm_username: sudheer
+    vm_lock_passwd: true
+    vm_vm_type: Ubuntu
+    vm_os_variant: ubuntu22.04
+    vm_ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMTU9mySQ3UQU3zv69mt1z/2eXwTPzUNamKQi0ZCTG3m sudheer@sudheer.net
+    vm_ssh_login: True
+    vm_instance_id: kubea-cp-01
+    vm_local_hostname: kubea-cp-01
+    vm_static_ip: 192.168.0.101/32
+    vm_gateway_ip: 8.8.8.8
+    vm_route_destination: 192.168.0.0/16
+    vm_route_via: 192.168.0.101
+    vm_directory_name: kubea-cp-01
+    vm_cloudimg_url: http://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+    vm_cloudimg: ubuntu_cloudimg01
+    vm_baseimg: ubuntu_baseimg01
+    vm_static_network: true
+    vm_storage: 10G
+    vm_host_interface: enp3s0
+    vm_guest_interface:  enp7s0
+    vm_bridge_interface: br0
+    vm_bridge_name: host_bridge
+    vm_create_bridge_network: false
+    ansible_python_interpreter: /usr/bin/python3
+
+  - name: roleinput2
+    vm_vm_name: kubea-wn-01
+    vm_vm_username: sudheer
+    vm_lock_passwd: true
+    vm_vm_type: Ubuntu
+    vm_os_variant: ubuntu22.04
+    vm_ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMTU9mySQ3UQU3zv69mt1z/2eXwTPzUNamKQi0ZCTG3m sudheer@sudheer.net
+    vm_ssh_login: True
+    vm_instance_id: kubea-wn-01
+    vm_local_hostname: kubea-wn-01
+    vm_static_ip: 192.168.0.102/32
+    vm_gateway_ip: 8.8.8.8
+    vm_route_destination: 192.168.0.0/16
+    vm_route_via: 192.168.0.102
+    vm_directory_name: kubea-wn-01
+    vm_cloudimg_url: http://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+    vm_cloudimg: ubuntu_cloudimg02
+    vm_baseimg: ubuntu_baseimg02
+    vm_static_network: true
+    vm_storage: 10G
+    vm_host_interface: enp3s0
+    vm_guest_interface:  enp7s0
+    vm_bridge_interface: br0
+    vm_bridge_name: host_bridge
+    vm_create_bridge_network: false
+    ansible_python_interpreter: /usr/bin/python3
+
+  - name: roleinput3
+    vm_vm_name: kubea-wn-02
+    vm_vm_username: sudheer
+    vm_lock_passwd: true
+    vm_vm_type: Ubuntu
+    vm_os_variant: ubuntu22.04
+    vm_ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMTU9mySQ3UQU3zv69mt1z/2eXwTPzUNamKQi0ZCTG3m sudheer@sudheer.net
+    vm_ssh_login: True
+    vm_instance_id: kubea-wn-02
+    vm_local_hostname: kubea-wn-02
+    vm_static_ip: 192.168.0.103/32
+    vm_gateway_ip: 8.8.8.8
+    vm_route_destination: 192.168.0.0/16
+    vm_route_via: 192.168.0.103
+    vm_directory_name: kubea-wn-02
+    vm_cloudimg_url: http://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+    vm_cloudimg: ubuntu_cloudimg03
+    vm_baseimg: ubuntu_baseimg03
+    vm_static_network: true
+    vm_storage: 10G
+    vm_host_interface: enp3s0
+    vm_guest_interface:  enp7s0
+    vm_bridge_interface: br0
+    vm_bridge_name: host_bridge
+    vm_create_bridge_network: false
+    ansible_python_interpreter: /usr/bin/python3
