@@ -6,3 +6,10 @@
 
 3> Get detailed information about a specific VM:
    virsh dominfo <vm_name>
+
+4> Get IP Address of the VM:
+   virsh domifaddr <vm_name>
+
+5> Delete the VM:
+   virsh shutdown <vm_name>
+   virsh undefine <vm_name>
