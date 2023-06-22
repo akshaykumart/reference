@@ -13,3 +13,6 @@
 5> Delete the VM:
    virsh shutdown <vm_name>
    virsh undefine <vm_name>
+
+6> Check Network
+   virsh domiflist <vm_name>
