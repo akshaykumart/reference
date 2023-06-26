@@ -1,0 +1,20 @@
+# check the Interface status
+ nmcli device status  
+
+# Disconnect particular Interface
+ nmcli dev disconnect <interface_name>
+
+# Connect the disconnected Interface
+ nmcli dev connect <interface_name>
+
+# Bring down the Interface Connection
+ nmcli connection down <interface_name>
+ nmcli connection down br0
+
+# Bring Up thr Interface Connection
+ nmcli connection up <interface_name>
+ nmcli connection up br0
+
+# Delete the Interface
+ nmcli connection delete <interface_name>
+ nmcli connection delete br0
