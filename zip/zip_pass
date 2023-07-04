@@ -1,0 +1,8 @@
+# To Zip a file with password
+
+$ sudo apt install zip unzip
+$ zip -re output_file.zip file1 folder1
+
+# To unzip a file
+
+$ unzip output_file.zip
