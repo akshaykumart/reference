@@ -1,0 +1,5 @@
+* Creating a new resources
+  $ kubectl apply -f nginx.yml
+
+* Updating a resources
+  $ kubectl apply -f nginx.yml
