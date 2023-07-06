@@ -8,6 +8,9 @@
 * Generate POD Manifest YAML file (-o yaml).
   $ kubectl run nginx --image=nginx --dry-run=client -o yaml
 
+* Generate POD YAML file of exixting POD.
+  $ kubectl get pod webapp -o yaml > my-new-pod.yaml
+
 * Create a Deployment using CLI
   $ kubectl create deployment --image=nginx nginx
 
