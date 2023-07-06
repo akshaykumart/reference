@@ -24,6 +24,9 @@
 * Scale replicas in deployment
   $ kubectl scale deployment nginx --replicas=4
 
+* Edit deployment 
+  $ kubectl edit deployment my-deployment
+
 * Create a Service named redis-service of type ClusterIP to expose pod redis on port 6379
   $ kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml
 
